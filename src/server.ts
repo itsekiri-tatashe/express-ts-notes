@@ -1,6 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 
+// Routes
+import productsRoutes from "./routes/productsRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -9,20 +12,11 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "Server is Running" });
+app.get("/health", (req, res) => {
+  res.json({ message: "Server running healthy" });
 });
 
-app.get("/estates", (req, res) => {
-  res.json({
-    message: "Estates retrieved successfully!",
-    estates: {
-      1: "Dolphin Estate",
-      2: "Second Avenue Estate",
-      3: "Parkview Estate",
-    },
-  });
-});
+app.use("/products", productsRoutes);
 
 // Start Server
 app.listen(PORT, () => {
