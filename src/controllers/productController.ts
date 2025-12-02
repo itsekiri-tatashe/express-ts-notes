@@ -10,7 +10,9 @@ export function getProductById(req: Request, res: Response) {
 }
 
 export function createProduct(req: Request, res: Response) {
-  res.json({ message: "Create Product Endpoint" });
+  const payload = req.body;
+  console.log(payload);
+  res.json({ message: "Product added successfully!", product: payload });
 }
 
 export function updateProduct(req: Request, res: Response) {
