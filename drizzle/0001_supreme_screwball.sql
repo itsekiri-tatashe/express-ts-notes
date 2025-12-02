@@ -1,0 +1,1 @@
+ALTER TABLE "ecommerce"."products" ADD COLUMN "quantity" integer DEFAULT 0;

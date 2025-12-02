@@ -11,7 +11,6 @@ export function getProductById(req: Request, res: Response) {
 
 export function createProduct(req: Request, res: Response) {
   const payload = req.body;
-  console.log(payload);
   res.json({ message: "Product added successfully!", product: payload });
 }
 
