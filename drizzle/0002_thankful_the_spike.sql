@@ -1,0 +1,1 @@
+ALTER TABLE "ecommerce"."products" ADD COLUMN "brand" varchar(255);

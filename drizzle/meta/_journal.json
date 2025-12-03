@@ -15,6 +15,13 @@
       "when": 1764708080508,
       "tag": "0001_supreme_screwball",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1764718738987,
+      "tag": "0002_thankful_the_spike",
+      "breakpoints": true
     }
   ]
 }

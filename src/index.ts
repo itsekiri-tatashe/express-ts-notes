@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 
 // Routes
 import productsRoutes from "./routes/productsRoutes.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();
 
@@ -17,6 +18,9 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/products", productsRoutes);
+
+// Error Handler
+app.use(errorHandler);
 
 // Start Server
 app.listen(PORT, () => {
