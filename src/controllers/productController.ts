@@ -22,10 +22,31 @@ export const getAllProducts = async (
   }
 };
 
-export function getProductById(req: Request, res: Response) {
-  const productId = req.params["id"];
-  res.json({ message: `ProductView Endpoint: ${productId}` });
-}
+// GET /products/:id
+export const getProductById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productId = req.params["id"]!;
+
+    const product = await productService.getProductbyId(productId);
+    console.log(product);
+    if (!product) {
+      return res.status(404).json({
+        message: "Product does not exist",
+      });
+    }
+
+    res.json({
+      message: "Product retrieved successfully!",
+      data: product,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 // POST /products
 export const createProduct = async (
@@ -61,10 +82,17 @@ export const createProduct = async (
   }
 };
 
-export function updateProduct(req: Request, res: Response) {
-  const productId = req.params["id"];
-  res.json({ message: `ProductUpdate Endpoint: ${productId}` });
-}
+// export const updateProduct = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const productId = req.params["id"];
+//   try{
+
+//   }
+//   res.json({ message: `ProductUpdate Endpoint: ${productId}` });
+// };
 
 export function deleteProduct(req: Request, res: Response) {
   const productId = req.params["id"];

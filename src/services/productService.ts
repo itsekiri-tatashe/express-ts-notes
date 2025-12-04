@@ -1,10 +1,23 @@
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { db } from "../db/index.js";
 import { NewProduct, Product, productsTable } from "../db/products.schema.js";
 
 // Get All Products
 export const getAllProducts = async (): Promise<Product[]> => {
   return await db.select().from(productsTable).orderBy(desc(productsTable.id));
+};
+
+// Get Single Product By ID
+export const getProductbyId = async (
+  id: string
+): Promise<Product | undefined> => {
+  const product = await db
+    .select()
+    .from(productsTable)
+    .where(eq(productsTable.id, id))
+    .limit(1);
+
+  return product[0];
 };
 
 // Create Product
@@ -14,3 +27,17 @@ export const createProduct = async (
   const [product] = await db.insert(productsTable).values(data).returning();
   return product;
 };
+
+// Edit Product
+// export const updateProduct = async (
+//   id: string,
+//   data: Partial<Product>
+// ): Promise<Product | undefined> => {
+//   const result = await db
+//     .update(productsTable)
+//     .set({ ...data })
+//     .where(eq(productsTable.id, id))
+//     .returning();
+
+//   return result[0];
+// };
