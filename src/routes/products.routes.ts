@@ -3,7 +3,11 @@ import * as productController from "../controllers/productController.js";
 
 // Request Validation Middleware
 import { validate } from "../middleware/validateHandler.js";
-import { getProductByIdSchema } from "../validators/productValidators.js";
+import {
+  createProductSchema,
+  getProductByIdSchema,
+  updateProductSchema,
+} from "../validators/productValidators.js";
 
 const router = Router();
 
@@ -15,9 +19,17 @@ router.get(
   productController.getProductById
 );
 
-router.post("/", productController.createProduct);
+router.post(
+  "/",
+  validate(createProductSchema),
+  productController.createProduct
+);
 
-// router.put("/:id", updateProduct);
+router.put(
+  "/:id",
+  validate(updateProductSchema),
+  productController.updateProduct
+);
 
 // router.delete("/:id", deleteProduct);
 

@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 // Routes
-import productsRoutes from "./routes/productsRoutes.js";
+import productsRoutes from "./routes/products.routes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();

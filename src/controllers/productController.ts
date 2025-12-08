@@ -32,7 +32,6 @@ export const getProductById = async (
     const productId = req.params["id"]!;
 
     const product = await productService.getProductbyId(productId);
-    console.log(product);
     if (!product) {
       return res.status(404).json({
         message: "Product does not exist",
@@ -82,17 +81,32 @@ export const createProduct = async (
   }
 };
 
-// export const updateProduct = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const productId = req.params["id"];
-//   try{
+// PUT /products/:id
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productId = req.params["id"]!;
+    const payload = req.body;
 
-//   }
-//   res.json({ message: `ProductUpdate Endpoint: ${productId}` });
-// };
+    // Check if product exists
+    const existingProduct = await productService.getProductbyId(productId);
+    if (!existingProduct) {
+      return res.status(404).json({
+        message: "Product does not exist",
+      });
+    }
+
+    // Update product
+    const product = await productService.updateProduct(productId, payload);
+
+    res.json({ message: "Product updated successfully", data: product });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export function deleteProduct(req: Request, res: Response) {
   const productId = req.params["id"];

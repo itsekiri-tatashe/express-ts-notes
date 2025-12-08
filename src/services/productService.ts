@@ -29,15 +29,15 @@ export const createProduct = async (
 };
 
 // Edit Product
-// export const updateProduct = async (
-//   id: string,
-//   data: Partial<Product>
-// ): Promise<Product | undefined> => {
-//   const result = await db
-//     .update(productsTable)
-//     .set({ ...data })
-//     .where(eq(productsTable.id, id))
-//     .returning();
+export const updateProduct = async (
+  id: string,
+  data: Partial<Product>
+): Promise<Product | undefined> => {
+  const result = await db
+    .update(productsTable)
+    .set({ ...data })
+    .where(eq(productsTable.id, id))
+    .returning();
 
-//   return result[0];
-// };
+  return result[0];
+};
