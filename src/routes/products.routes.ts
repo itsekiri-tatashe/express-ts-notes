@@ -27,10 +27,15 @@ router.post(
 
 router.put(
   "/:id",
+  validate(getProductByIdSchema),
   validate(updateProductSchema),
   productController.updateProduct
 );
 
-// router.delete("/:id", deleteProduct);
+router.delete(
+  "/:id",
+  validate(getProductByIdSchema),
+  productController.deleteProduct
+);
 
 export default router;

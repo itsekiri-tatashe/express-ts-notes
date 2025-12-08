@@ -41,3 +41,13 @@ export const updateProduct = async (
 
   return result[0];
 };
+
+// Delete a Product
+export const deleteProduct = async (id: string): Promise<boolean> => {
+  const result = await db
+    .delete(productsTable)
+    .where(eq(productsTable.id, id))
+    .returning();
+
+  return result.length > 0;
+};

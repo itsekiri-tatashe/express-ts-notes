@@ -108,7 +108,27 @@ export const updateProduct = async (
   }
 };
 
-export function deleteProduct(req: Request, res: Response) {
-  const productId = req.params["id"];
-  res.json({ message: `ProductDelete Endpoint: ${productId}` });
-}
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productId = req.params["id"]!;
+
+    // Check if product exists
+    const existingProduct = await productService.getProductbyId(productId);
+    if (!existingProduct) {
+      return res.status(404).json({
+        message: "Product does not exist",
+      });
+    }
+
+    // Delete product
+    const product = await productService.deleteProduct(productId);
+
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
