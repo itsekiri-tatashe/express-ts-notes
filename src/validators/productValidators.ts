@@ -14,8 +14,11 @@ export const createProductSchema = z.object({
       .max(255, "Name must not pass 255 letters"),
     description: z.string(),
     image: z.string().max(255).optional(),
-    price: z.float32("Price is required and must be a number").min(0),
-    quantity: z.number().min(0).optional(),
+    price: z
+      .float32("Price is required and must be a number")
+      .min(0)
+      .positive("Price must be a positive number"),
+    quantity: z.number().min(0).nonnegative().optional(),
     brand: z.string().max(255).optional(),
   }),
 });
@@ -28,7 +31,11 @@ export const updateProductSchema = z.object({
     .optional(),
   description: z.string().optional(),
   image: z.string().max(255).optional(),
-  price: z.float32().min(0).optional(),
-  quantity: z.number().min(0).optional(),
+  price: z
+    .float32("Price is required and must be a number")
+    .min(0)
+    .positive("Price must be a positive number")
+    .optional(),
+  quantity: z.number().min(0).nonnegative().optional(),
   brand: z.string().max(255).optional(),
 });

@@ -14,8 +14,8 @@ export const getAllProducts = async (
 
     res.json({
       message: "Prodcts retrieved successfully!",
+      total: products.length,
       data: products,
-      count: products.length,
     });
   } catch (error) {
     next(error);
@@ -55,14 +55,6 @@ export const createProduct = async (
 ) => {
   try {
     const { name, description, image, price, quantity } = req.body;
-
-    // Simple validation (we'll add Zod later)
-    if (!name || !price) {
-      return res.status(400).json({
-        success: false,
-        message: "Name and price are required",
-      });
-    }
 
     const product = await productService.createProduct({
       name,
