@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1766683286200,
+      "tag": "0000_soft_ben_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766683410322,
+      "tag": "0001_huge_odin",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1766683540370,
+      "tag": "0002_glossy_firebird",
+      "breakpoints": true
+    }
+  ]
+}
