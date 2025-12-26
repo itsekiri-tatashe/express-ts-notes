@@ -8,6 +8,7 @@ import {
   getProductByIdSchema,
   updateProductSchema,
 } from "../validators/product.validators";
+import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
 
@@ -95,6 +96,8 @@ router.get(
  *     summary: Create a new product
  *     tags: [Products]
  *     description: Add a new product to the system.
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -121,6 +124,7 @@ router.get(
  */
 router.post(
   "/",
+  authenticate,
   validate(createProductSchema),
   productController.createProduct
 );
@@ -132,6 +136,8 @@ router.post(
  *     summary: Update an existing product
  *     tags: [Products]
  *     description: Update any field of an existing product by its ID.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -173,6 +179,7 @@ router.post(
  */
 router.put(
   "/:id",
+  authenticate,
   validate(getProductByIdSchema),
   validate(updateProductSchema),
   productController.updateProduct
@@ -185,6 +192,8 @@ router.put(
  *     summary: Delete a product by ID
  *     tags: [Products]
  *     description: Permanently remove a product from the system.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -218,6 +227,7 @@ router.put(
  */
 router.delete(
   "/:id",
+  authenticate,
   validate(getProductByIdSchema),
   productController.deleteProduct
 );

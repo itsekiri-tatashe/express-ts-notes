@@ -1,11 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import "dotenv/config";
-
 import { db } from "../db/index";
 import { usersTable } from "../db/user.schema";
 import { eq } from "drizzle-orm";
+import { comparePassword, hashPassword } from "../utils/hash";
+import { signToken } from "../utils/jwt";
 
 export const registerUser = async (
   req: Request,
@@ -28,7 +26,7 @@ export const registerUser = async (
     }
 
     // hash password
-    payload["password"] = await bcrypt.hash(payload["password"], 10);
+    payload["password"] = await hashPassword(payload["password"]);
 
     const [user] = await db.insert(usersTable).values(payload).returning();
     //   Return only vital info
@@ -65,7 +63,7 @@ export const loginUser = async (
     }
 
     // hash password
-    const matchPassword = await bcrypt.compare(
+    const matchPassword = await comparePassword(
       payload["password"],
       user.password
     );
@@ -74,11 +72,7 @@ export const loginUser = async (
     }
 
     // Create JWT Token
-    const token = jwt.sign(
-      { userId: user.id, role: user.role },
-      process.env.SECRET_KEY!,
-      { expiresIn: "12h" }
-    );
+    const token = signToken({ userId: user.id, role: user.role });
 
     res
       .status(200)
