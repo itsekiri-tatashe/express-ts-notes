@@ -24,7 +24,7 @@ export const registerUser = async (
       .limit(1);
 
     if (existingUser) {
-      res.status(409).json({ message: "Email is already registered" });
+      return res.status(409).json({ message: "Email is already registered" });
     }
 
     // hash password
@@ -38,7 +38,7 @@ export const registerUser = async (
       .status(201)
       .json({ message: "User created successfully", data: safeUser });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -61,7 +61,7 @@ export const loginUser = async (
       .limit(1);
 
     if (!user) {
-      res.status(401).json({ message: "Invalid Credentials" });
+      return res.status(401).json({ message: "Invalid Credentials" });
     }
 
     // hash password
@@ -70,7 +70,7 @@ export const loginUser = async (
       user.password
     );
     if (!matchPassword) {
-      res.status(401).json({ message: "Invalid Credentials" });
+      return res.status(401).json({ message: "Invalid Credentials" });
     }
 
     // Create JWT Token
@@ -84,7 +84,7 @@ export const loginUser = async (
       .status(200)
       .json({ message: "User signed in successfully", data: token });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
