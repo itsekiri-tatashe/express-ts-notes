@@ -1,5 +1,5 @@
 import { text, uuid, varchar } from "drizzle-orm/pg-core";
-import { mySchema } from "./products.schema";
+import { mySchema } from "./product.schema";
 
 // Users Table
 export const usersTable = mySchema.table("users", {

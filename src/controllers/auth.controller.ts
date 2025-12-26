@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 import { db } from "../db/index";
-import { usersTable } from "../db/users.schema";
+import { usersTable } from "../db/user.schema";
 import { eq } from "drizzle-orm";
 
 export const registerUser = async (

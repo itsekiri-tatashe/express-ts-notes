@@ -8,9 +8,9 @@ import swaggerUI from "swagger-ui-express";
 import cors from "cors";
 
 // Other Imports
-import productsRoutes from "./routes/products.routes";
+import productsRoutes from "./routes/product.routes";
 import authRoutes from "./routes/auth.routes";
-import { errorHandler } from "./middleware/errorHandler";
+import { errorHandler } from "./middleware/errorHandler.middleware";
 import { swaggerSpec } from "./config/swagger";
 
 dotenv.config();

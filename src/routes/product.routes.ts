@@ -1,13 +1,13 @@
 import { Router } from "express";
-import * as productController from "../controllers/productController";
+import * as productController from "../controllers/product.controller";
 
 // Request Validation Middleware
-import { validate } from "../middleware/validateHandler";
+import { validate } from "../middleware/validateHandler.middleware";
 import {
   createProductSchema,
   getProductByIdSchema,
   updateProductSchema,
-} from "../validators/productValidators";
+} from "../validators/product.validators";
 
 const router = Router();
 

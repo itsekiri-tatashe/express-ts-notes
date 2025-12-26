@@ -1,6 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { db } from "../db/index";
-import { NewProduct, Product, productsTable } from "../db/products.schema";
+import { NewProduct, Product, productsTable } from "../db/product.schema";
 
 // Get All Products
 export const getAllProducts = async (): Promise<Product[]> => {

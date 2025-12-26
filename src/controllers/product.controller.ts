@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 // Services
-import * as productService from "../services/productService";
+import * as productService from "../services/product.service";
 
 // GET /products
 export const getAllProducts = async (
